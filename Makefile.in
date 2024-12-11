@@ -320,6 +320,8 @@ AUTOMAKE_OPTIONS = foreign
 my_program_SOURCES = main.cpp FuncA.cpp FuncA.h
 dist_man_MANS = Funk.1
 dist_pkgdata_DATA = data.txt
+CTRLF_DIR = $(CURDIR)/deb/DEBIAN
+CTRLF_NAME = $(CTRLF_DIR)/control
 all: all-am
 
 .SUFFIXES:
@@ -864,9 +866,16 @@ uninstall-man: uninstall-man1
 
 .PRECIOUS: Makefile
 
-.PHONY: deb
 
+.PHONY: deb
 deb:
+	mkdir -p $(CTRLF_DIR)
+	echo Package: $(PACKAGE) > $(CTRLF_NAME)
+	echo Version: $(VERSION) >> $(CTRLF_NAME)
+	echo Architecture: all >> $(CTRLF_NAME)
+	echo Maintainer: $(PACKAGE_BUGREPORT) >> $(CTRLF_NAME)
+	echo -n "Description:" >> $(CTRLF_NAME)
+	cat Funk.1 >> $(CTRLF_NAME)  
 	make DESTDIR=$(CURDIR)/deb install
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
