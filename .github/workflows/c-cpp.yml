@@ -1,0 +1,16 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "branchAutoMake" ]
+  pull_request:
+    branches: [ "branchAutoMake" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4   
+    - name: Build project
+      run: ./configure && make
+    - name: Create tarball
+      run: make dist
