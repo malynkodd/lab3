@@ -1,0 +1,21 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "branchAutoTest" ]
+  pull_request:
+    branches: [ "branchAutoTest" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4   
+    - name: configure
+      run: ./configure   
+    - name: make
+      run: make
+    - name: Test
+      run: cd ./tests && make check
