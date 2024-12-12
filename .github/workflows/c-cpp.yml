@@ -1,0 +1,17 @@
+name: C/C++ CI
+on:
+  push:
+    branches: [ "branchAutoPackage" ]
+  pull_request:
+    branches: [ "branchAutoPackage" ]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4   
+    - name: Build project
+      run: ./configure && make
+    - name: Create tarball
+      run: make deb 
