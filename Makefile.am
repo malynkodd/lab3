@@ -7,6 +7,8 @@ dist_pkgdata_DATA=data.txt
 CTRLF_DIR=$(CURDIR)/deb/DEBIAN
 CTRLF_NAME=$(CTRLF_DIR)/control
 
+SUBDIR = tests
+
 .PHONY: deb
 deb:
 	mkdir -p $(CTRLF_DIR)
