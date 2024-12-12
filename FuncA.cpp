@@ -1,6 +1,55 @@
 #include "FuncA.h"
 #include <cmath>
 #include <vector>
+#include <chrono>
+#include <algorithm>
+#include <cstdio>
+#include <iostream>
+
+
+void FuncA::serverimulation() {
+
+    // Змінна для зберігання часу
+    char strTimeEllapsed[20];
+    
+    // Початок вимірювання часу
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    std::vector<double> aValues;
+    FuncA func;
+
+    const int n = 5; // Number of terms in the series
+    const double xStart = 0.0; // Starting value for calculations
+    const int arraySize = 2000000; // Number of elements in the array
+
+    for (int i = 0; i < arraySize; i++) {
+        double x = xStart + i * 0.0001; // Increment x slightly for each value
+        aValues.push_back(func.calculateTrigFunction(n, x));
+    }
+
+    // Сортування вектора
+    for (int i = 0; i < 500; i++) {
+        sort(aValues.begin(), aValues.end());
+        reverse(aValues.begin(), aValues.end());
+    }
+
+    // Кінець вимірювання часу
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto int_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+
+    // Отримуємо значення часу в мілісекундах
+    int iMS = int_ms.count();
+
+    // Перетворюємо час в рядок
+    sprintf(strTimeEllapsed, "%d ms", iMS);
+
+    // Виводимо час
+    std::cout << "Elapsed time: " << strTimeEllapsed << std::endl;
+}
+
+
+
+
 
 // Function to return Bernoulli numbers based on the index provided
 double FuncA::bernoulli(int index) {

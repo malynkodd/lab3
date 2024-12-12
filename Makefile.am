@@ -1,13 +1,13 @@
 AUTOMAKE_OPTIONS = foreign
 bin_PROGRAMS = my_program
-my_program_SOURCES = main.cpp FuncA.cpp FuncA.h
+my_program_SOURCES = main.cpp FuncA.cpp FuncA.h HTTP_Server.cpp
 dist_man_MANS=Funk.1
 dist_pkgdata_DATA=data.txt
 
 CTRLF_DIR=$(CURDIR)/deb/DEBIAN
 CTRLF_NAME=$(CTRLF_DIR)/control
 
-SUBDIR = tests
+SUBDIRS = tests
 
 .PHONY: deb
 deb:
