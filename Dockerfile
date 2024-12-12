@@ -1,6 +1,13 @@
-FROM alpine
+FROM alpine AS build
+RUN apk add --no-cache git build-base cmake automake autoconf coreutils
 WORKDIR /home/optima
-COPY ../my_program .
-RUN apk add libstdc++
-RUN apk add libc6-compat
-ENTRYPOINT ["./my_program"]
+RUN git clone https://github.com/malynkodd/lab3.git .
+RUN autoreconf -i
+RUN ./configure
+RUN make
+
+FROM alpine
+RUN apk add --no-cache libstdc++
+COPY --from=build /home/optima/my_program /usr/local/bin/my_program
+ENTRYPOINT ["/usr/local/bin/my_program"]
+
