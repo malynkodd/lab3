@@ -3,11 +3,12 @@
 #include <iostream>
 
 
+int CreateHTTPserver();
 
 int main() {
 
- FuncA func;
- func.serverimulation();
+CreateHTTPserver();
+ 
 
     return 0;
 }
